@@ -1,7 +1,9 @@
 package com.gl.police.daoAPI;
 
 import com.gl.police.entity.Person;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PersonMapper {
     int deleteByPrimaryKey(String uId);
 

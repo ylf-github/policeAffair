@@ -8,11 +8,17 @@
   <sql id="Base_Column_List" >
     adminId, password
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from admin
     where adminId = #{adminid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from admin
+  </select>
+  <select id="" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from admin where adminId=#{phone}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from admin
