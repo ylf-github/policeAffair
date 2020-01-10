@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gl.police.daoAPI.MapperMapper" >
+  <resultMap id="BaseResultMap" type="com.gl.police.entity.MapperKey" >
+    <id column="u_id" property="uId" jdbcType="VARCHAR" />
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.gl.police.entity.MapperKey" >
+    delete from mapper
+    where u_id = #{uId,jdbcType=VARCHAR}
+      and c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gl.police.entity.MapperKey" >
+    insert into mapper (u_id, c_id)
+    values (#{uId,jdbcType=VARCHAR}, #{cId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gl.police.entity.MapperKey" >
+    insert into mapper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

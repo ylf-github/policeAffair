@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gl.police.daoAPI.LawCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.gl.police.entity.LawCase" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="happenTime" property="happentime" jdbcType="TIMESTAMP" />
+    <result column="happenAddress" property="happenaddress" jdbcType="VARCHAR" />
+    <result column="casetype" property="casetype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, title, details, happenTime, happenAddress, casetype
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from lawCase
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from lawCase
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gl.police.entity.LawCase" >
+    insert into lawCase (c_id, title, details, 
+      happenTime, happenAddress, casetype
+      )
+    values (#{cId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{happentime,jdbcType=TIMESTAMP}, #{happenaddress,jdbcType=VARCHAR}, #{casetype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gl.police.entity.LawCase" >
+    insert into lawCase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="happentime != null" >
+        happenTime,
+      </if>
+      <if test="happenaddress != null" >
+        happenAddress,
+      </if>
+      <if test="casetype != null" >
+        casetype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="happentime != null" >
+        #{happentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="happenaddress != null" >
+        #{happenaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        #{casetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gl.police.entity.LawCase" >
+    update lawCase
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="happentime != null" >
+        happenTime = #{happentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="happenaddress != null" >
+        happenAddress = #{happenaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="casetype != null" >
+        casetype = #{casetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gl.police.entity.LawCase" >
+    update lawCase
+    set title = #{title,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      happenTime = #{happentime,jdbcType=TIMESTAMP},
+      happenAddress = #{happenaddress,jdbcType=VARCHAR},
+      casetype = #{casetype,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

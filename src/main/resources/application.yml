@@ -1,0 +1,23 @@
+server:
+  port: 8765
+spring:
+  jackson:
+    time-zone: GMT+8
+  application:
+    name: face-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.27.246.207:3306/policeAffair?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: haha123.
+  redis:
+    host: 120.27.246.207
+    port: 6379
+    password: haha123.
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com:
+      gl:
+        police: debug
