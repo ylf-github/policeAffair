@@ -1,6 +1,11 @@
 server:
   port: 8765
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 20MB
+      max-file-size: 10MB
   jackson:
     time-zone: GMT+8
   application:

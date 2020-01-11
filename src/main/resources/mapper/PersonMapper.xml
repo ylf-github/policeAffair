@@ -149,4 +149,15 @@
       img = #{img,jdbcType=VARCHAR}
     where u_id = #{uId,jdbcType=VARCHAR}
   </update>
+  <select id="selectPageList" parameterType="com.gl.police.entity.BaseReqPage" resultMap="BaseResultMap">
+     select * from person limit #{pageNo},#{pageSize}
+  </select>
+
+  <select id="selectListCount" resultType="java.lang.Integer">
+    select count(*) from person;
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from person
+  </select>
 </mapper>

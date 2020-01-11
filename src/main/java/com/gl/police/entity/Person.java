@@ -1,11 +1,15 @@
 package com.gl.police.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 
 public class Person {
     private String uId;
 
     private String username;
+
+    private MultipartFile photo;
 
     private String sex;
 
@@ -101,5 +105,13 @@ public class Person {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
     }
 }
