@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @author: leifeng.ye
@@ -48,5 +49,15 @@ public class PersonController {
     public Response selectList(){
         ArrayList<Person> list=(ArrayList<Person>) service.selectList();
         return Response.success(list,"添加成功");
+    }
+
+    @RequestMapping("/selectPerson")
+    @CrossOrigin
+    public Response selectPerson(@RequestBody Map map){
+        String uId=(String) map.get("uId");
+        Person person=service.selectPersonById(uId);
+        ArrayList list=new ArrayList();
+        list.add(person);
+        return Response.success(list,"查询成功");
     }
 }

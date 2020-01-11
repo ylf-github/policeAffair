@@ -18,4 +18,5 @@ public interface PersonService {
     BaseResPage selectPageList(BaseReqPage page);  //分页查询人员
     Integer selectListCount();     //人员总数
     List selectList(); //返回所有人员
+    Person selectPersonById(String uId);  //查询用户
 }

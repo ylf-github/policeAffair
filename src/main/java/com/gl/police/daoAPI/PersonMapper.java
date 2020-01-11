@@ -16,4 +16,6 @@ public interface PersonMapper {
     Integer selectListCount();
 
     List selectList();
+
+    Person selectById(String uId);
 }

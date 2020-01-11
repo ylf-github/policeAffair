@@ -87,4 +87,14 @@ public class PersonServiceImpl implements PersonService {
         }
         return list;
     }
+
+    @Override
+    public Person selectPersonById(String uId) {
+        Person person=dao.selectById(Encoder.decoder(uId));
+        person.setuId(Encoder.decoder(person.getuId()));
+        if(person.getPhone()!=null){
+            person.setPhone(Encoder.decoder(person.getPhone()));
+        }
+        return person;
+    }
 }
