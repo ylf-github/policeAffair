@@ -58,6 +58,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public BaseResPage selectPageList(BaseReqPage page) {
         int total=selectListCount();
+        BaseResPage<Person> b=new BaseResPage();
+        b.setPageNo(page.getPageNo());
+        b.setPageSize(page.getPageSize());
+        b.setTotal(total);
+        page.setPageNo(page.getPageNo()*page.getPageSize());
         ArrayList<Person> list=(ArrayList<Person>)dao.selectPageList(page);
         for(Person a:list){
             a.setuId(Encoder.decoder(a.getuId()));
@@ -65,10 +70,6 @@ public class PersonServiceImpl implements PersonService {
                 a.setPhone(Encoder.decoder(a.getPhone()));
             }
         }
-        BaseResPage<Person> b=new BaseResPage();
-        b.setPageNo(page.getPageNo());
-        b.setPageSize(page.getPageSize());
-        b.setTotal(total);
         b.setResult(list);
         return b;
     }
@@ -153,5 +154,17 @@ public class PersonServiceImpl implements PersonService {
             }
         }
         return person;
+    }
+
+    @Override
+    public List selectPersonByCid(String cId) {
+        ArrayList<Person> list=(ArrayList<Person>) dao.selectPersonByCid(cId);
+        for(Person a:list){
+            a.setuId(Encoder.decoder(a.getuId()));
+            if(a.getPhone()!=null){
+                a.setPhone(Encoder.decoder(a.getPhone()));
+            }
+        }
+        return list;
     }
 }

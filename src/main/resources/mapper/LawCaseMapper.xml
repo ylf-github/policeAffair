@@ -12,7 +12,7 @@
   <sql id="Base_Column_List" >
     c_id, title, details, happenTime, happenAddress, casetype
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectLawCase" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from lawCase
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gl.police.entity.LawCase" >
+  <update id="updateSelective" parameterType="com.gl.police.entity.LawCase" >
     update lawCase
     <set >
       <if test="title != null" >
@@ -94,13 +94,34 @@
     </set>
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gl.police.entity.LawCase" >
-    update lawCase
-    set title = #{title,jdbcType=VARCHAR},
-      details = #{details,jdbcType=VARCHAR},
-      happenTime = #{happentime,jdbcType=TIMESTAMP},
-      happenAddress = #{happenaddress,jdbcType=VARCHAR},
-      casetype = #{casetype,jdbcType=VARCHAR}
-    where c_id = #{cId,jdbcType=VARCHAR}
-  </update>
+  <select id="selectPageLawCase" parameterType="com.gl.police.entity.BaseReqPage" resultMap="BaseResultMap">
+    select * from lawCase limit #{pageNo},#{pageSize}
+  </select>
+
+  <select id="selectLawCaseCount" resultType="java.lang.Integer">
+    select count(*) from lawCase
+  </select>
+
+  <select id="selectLawCaseSelective" parameterType="com.gl.police.entity.LawCase" resultMap="BaseResultMap">
+    select * from lawCase
+    <where>
+      <if test="casetype!=null and casetype!=''">
+        casetype=#{casetype}
+      </if>
+    </where>
+    <if test="orders=='101'">
+      order by happenTime DESC
+    </if>
+    <if test="orders=='102'">
+      order by happenTime ASC
+    </if>
+  </select>
+
+  <delete id="deleteLawCase" parameterType="java.lang.String">
+    delete from lawCase where c_id=#{cId}
+  </delete>
+
+  <select id="selectLawCaseByPerson" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from lawCase where c_id in (select c_id from mapper where u_id=#{uId})
+  </select>
 </mapper>

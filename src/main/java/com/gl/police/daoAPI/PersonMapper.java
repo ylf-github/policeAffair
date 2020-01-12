@@ -28,4 +28,6 @@ public interface PersonMapper {
     List selectPersonSelective(Person person);
 
     Person selectPersonByUid(String uId);
+
+    List selectPersonByCid(String cId);
 }

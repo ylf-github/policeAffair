@@ -1,19 +1,27 @@
 package com.gl.police.daoAPI;
 
+import com.gl.police.entity.BaseReqPage;
 import com.gl.police.entity.LawCase;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LawCaseMapper {
-    int deleteByPrimaryKey(String cId);
-
-    int insert(LawCase record);
 
     int insertSelective(LawCase record);
 
-    LawCase selectByPrimaryKey(String cId);
+    List selectPageLawCase(BaseReqPage page);
 
-    int updateByPrimaryKeySelective(LawCase record);
+    int selectLawCaseCount();
 
-    int updateByPrimaryKey(LawCase record);
+    List selectLawCaseSelective(LawCase lawCase);
+
+    int deleteLawCase(String cId);
+
+    int updateSelective(LawCase lawCase);
+
+    List selectLawCaseByPerson(String uId);
+
+    LawCase selectLawCase(String cId);
 }

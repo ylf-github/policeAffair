@@ -24,4 +24,5 @@ public interface PersonService {
     int deletePerson(String id);  //删除用户
     List selectLimitPerson(Person person);  //根据条件查询用户
     Person selectPersonByUid(String uId);  //根据身份证号查询用户
+    List selectPersonByCid(String cId); //根据案件查找用户
 }

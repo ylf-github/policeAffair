@@ -175,4 +175,8 @@
   <select id="selectPersonByUid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from person where u_id=#{uId}
   </select>
+
+  <select id="selectPersonByCid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from person where id in (select u_id from mapper where c_id=#{cId})
+  </select>
 </mapper>

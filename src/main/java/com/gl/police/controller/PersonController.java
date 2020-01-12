@@ -107,4 +107,12 @@ public class PersonController {
         ArrayList<Person> list=(ArrayList<Person>) service.selectLimitPerson(person);
         return Response.success(list,"查询成功");
     }
+
+    @RequestMapping("/selectPersonByCid")
+    @CrossOrigin
+    public Response selectPersonByCid(@RequestBody Map map){
+        String cId=(String)map.get("cId");
+        ArrayList<Person> list=(ArrayList<Person>) service.selectPersonByCid(cId);
+        return Response.success(list,"查询成功");
+    }
 }
