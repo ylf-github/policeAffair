@@ -6,6 +6,7 @@ import com.gl.police.entity.BaseResPage;
 import com.gl.police.entity.Person;
 import com.gl.police.serviceAPI.PersonService;
 import com.gl.police.util.Encoder;
+import com.gl.police.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public int addPerson(Person person) {
+        person.setId(UUID.getUUID());
         person.setuId(Encoder.encoder(person.getuId()));
         if(person.getPhone()!=null){
             person.setPhone(Encoder.encoder(person.getPhone()));
@@ -89,11 +91,66 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person selectPersonById(String uId) {
-        Person person=dao.selectById(Encoder.decoder(uId));
-        person.setuId(Encoder.decoder(person.getuId()));
+    public Person selectPersonById(String id) {
+        Person person=dao.selectById(id);
+        if(person!=null){
+            person.setuId(Encoder.decoder(person.getuId()));
+            if(person.getPhone()!=null){
+                person.setPhone(Encoder.decoder(person.getPhone()));
+            }
+        }
+        return person;
+    }
+
+    @Override
+    public int updateSelective(Person person) {
+        person.setuId(Encoder.encoder(person.getuId()));
         if(person.getPhone()!=null){
-            person.setPhone(Encoder.decoder(person.getPhone()));
+            person.setPhone(Encoder.encoder(person.getPhone()));
+        }
+        String img=savePersonPhoto(person);
+        person.setImg(img);
+        return dao.updateSelective(person);
+    }
+
+    @Override
+    public Person selectPersonByPhone(String phone) {
+        Person person=dao.selectPersonByPhone(Encoder.encoder(phone));
+        if(person!=null){
+            if(person.getuId()!=null){
+                person.setId(Encoder.decoder(person.getuId()));
+            }
+            if(person.getPhone()!=null){
+                person.setPhone(Encoder.decoder(person.getPhone()));
+            }
+        }
+        return person;
+    }
+
+    @Override
+    public int deletePerson(String id) {
+        return dao.delete(id);
+    }
+
+    @Override
+    public List selectLimitPerson(Person person) {
+        ArrayList<Person> list=(ArrayList<Person>) dao.selectPersonSelective(person);
+        for(Person a:list){
+            a.setuId(Encoder.decoder(a.getuId()));
+            if(a.getPhone()!=null){
+                a.setPhone(Encoder.decoder(a.getPhone()));
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Person selectPersonByUid(String uId) {
+        Person person=dao.selectPersonByUid(Encoder.encoder(uId));
+        if(person!=null){
+            if(person.getPhone()!=null){
+                person.setPhone(Encoder.decoder(person.getPhone()));
+            }
         }
         return person;
     }

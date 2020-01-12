@@ -18,4 +18,14 @@ public interface PersonMapper {
     List selectList();
 
     Person selectById(String uId);
+
+    int updateSelective(Person person);
+
+    Person selectPersonByPhone(String phone);
+
+    int delete(String id);
+
+    List selectPersonSelective(Person person);
+
+    Person selectPersonByUid(String uId);
 }

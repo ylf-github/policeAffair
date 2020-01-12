@@ -1,10 +1,14 @@
 package com.gl.police.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
 public class Person {
+
+    private String id;
+
     private String uId;
 
     private String username;
@@ -13,6 +17,7 @@ public class Person {
 
     private String sex;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
 
     private String address;
@@ -26,6 +31,8 @@ public class Person {
     private String political;
 
     private String img;
+
+    private String orders;
 
     public String getuId() {
         return uId;
@@ -113,5 +120,21 @@ public class Person {
 
     public void setPhoto(MultipartFile photo) {
         this.photo = photo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getOrders() {
+        return orders;
+    }
+
+    public void setOrders(String orders) {
+        this.orders = orders;
     }
 }
