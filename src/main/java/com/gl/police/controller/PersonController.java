@@ -45,7 +45,7 @@ public class PersonController {
         }
     }
 
-    @RequestMapping("/selectPageList")
+    @RequestMapping("/selectPersonPageList")
     @CrossOrigin
     public Response selectPerson(@RequestBody BaseReqPage page){
         ArrayList list=new ArrayList();
@@ -53,7 +53,7 @@ public class PersonController {
         return Response.success(list,"查询成功");
     }
 
-    @RequestMapping("/selectList")
+    @RequestMapping("/selectPersonList")
     @CrossOrigin
     public Response selectList(){
         ArrayList<Person> list=(ArrayList<Person>) service.selectList();
@@ -63,8 +63,8 @@ public class PersonController {
     @RequestMapping("/selectPerson")
     @CrossOrigin
     public Response selectPerson(@RequestBody Map map){
-        String uId=(String) map.get("uId");
-        Person person=service.selectPersonById(uId);
+        String id=(String) map.get("id");
+        Person person=service.selectPersonById(id);
         ArrayList list=new ArrayList();
         list.add(person);
         return Response.success(list,"查询成功");

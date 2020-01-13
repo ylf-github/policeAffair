@@ -163,6 +163,9 @@
       <if test="marriage!=null and marriage!=''">
        and marriage=#{marriage}
       </if>
+      <if test="political!=null and political!=''">
+        and political=#{political}
+      </if>
     </where>
     <if test="orders==101">
        order by birth DESC

@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public String savePersonPhoto(Person person) {
-        String basePath="http://localhost:8765/personPhoto/"+person.getuId();
+        String basePath="http://120.27.246.207:8765/personPhoto/"+person.getuId();
         String s=this.getClass().getClassLoader().getResource("").getPath();
         int index=s.lastIndexOf("target");
         String savePath=s.substring(0,index)+"src/main/resources/static/personPhoto/"+person.getuId();
